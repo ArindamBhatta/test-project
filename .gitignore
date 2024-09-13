@@ -1,0 +1,86 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/   
+test
+
+
+# Visual Studio Code related
+# (Consider including if you want to track VS Code settings)
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio   
+ build artifacts
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Additional patterns to consider:
+# IDE-specific settings or caches
+# Temporary files or directories
+# Generated code or artifacts
+# Dependency management files (e.g., npm, yarn, Gradle)
+# Test results or coverage reports
+
+# Example additional patterns:
+# Node.js/JavaScript
+node_modules/
+npm-debug.log
+.npmrc
+.yarn-cache/
+yarn-error.log
+coverage/
+test-results/
+
+# Python
+__pycache__/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+
+# Java
+*.jar
+*.war
+*.ear
+target/
+build/
+classes/
+
+# C/C++
+*.o
+*.so
+*.a
+.libs/
+obj/
+build/
+CMakeCache.txt
+CMakeFiles/
