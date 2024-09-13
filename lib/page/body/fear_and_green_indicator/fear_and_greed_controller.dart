@@ -3,6 +3,7 @@ import 'package:home_page/page/body/fear_and_green_indicator/heading_and_downloa
 import 'package:home_page/page/body/fear_and_green_indicator/static_image_indicator.dart';
 import 'data_percentage.dart';
 import 'package:home_page/repo/repo.dart';
+import '../../../model/model_one.dart';
 
 class FearAndGreedIndex extends StatefulWidget {
   const FearAndGreedIndex({super.key});
@@ -14,7 +15,7 @@ class FearAndGreedIndex extends StatefulWidget {
 }
 
 class _FearAndGreedIndexState extends State<FearAndGreedIndex> {
-  late Future<Map<String, dynamic>?> _dataFuture;
+  late Future<ModelOne?> _dataFuture;
 
   Color getColorFromCode(String colorCode) {
     switch (colorCode) {
@@ -45,12 +46,12 @@ class _FearAndGreedIndexState extends State<FearAndGreedIndex> {
   @override
   void initState() {
     super.initState();
-    _dataFuture = Repo.fetchData();
+    _dataFuture = Repo.accessFirstApi();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String, dynamic>?>(
+    return FutureBuilder<ModelOne?>(
       future: _dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -83,41 +84,35 @@ class _FearAndGreedIndexState extends State<FearAndGreedIndex> {
                             children: [
                               //* 1st container
                               DataPercentage(
-                                title: data['data']?['fg']?['h']?[0]?['t'] ??
-                                    '404',
-                                textData: (data['data']?['fg']?['h']?[0]?['c'])
-                                    .toString(),
-                                percentageData: (data['data']?['fg']?['h']?[0]
-                                        ?['v'])
-                                    .toString(),
+                                title: ((data.data?.fg?.h?[0].t).toString()),
+                                textData: ((data.data?.fg?.h?[0].c).toString()),
+                                percentageData:
+                                    ((data.data?.fg?.h?[0].v).toString()),
                                 defineColor: getColorFromCode(
-                                    data['data']?['fg']?['h']?[0]?['cc'] ?? ''),
+                                  ((data.data?.fg?.h?[0].cc).toString()),
+                                ),
                               ),
                               const SizedBox(height: 8),
                               //* 2nd container
                               DataPercentage(
-                                title: data['data']?['fg']?['h']?[1]?['t'] ??
-                                    '404',
-                                textData: (data['data']?['fg']?['h']?[1]?['c'])
-                                    .toString(),
-                                percentageData: (data['data']?['fg']?['h']?[1]
-                                        ?['v'])
-                                    .toString(),
+                                title: ((data.data?.fg?.h?[1].t).toString()),
+                                textData: ((data.data?.fg?.h?[1].c).toString()),
+                                percentageData:
+                                    ((data.data?.fg?.h?[1].v).toString()),
                                 defineColor: getColorFromCode(
-                                    data['data']?['fg']?['h']?[1]?['cc'] ?? ''),
+                                  ((data.data?.fg?.h?[1].cc).toString()),
+                                ),
                               ),
                               const SizedBox(height: 8),
                               //* 3rd container
                               DataPercentage(
-                                title: data['data']?['fg']?['h']?[2]?['t'] ??
-                                    '404',
-                                textData: (data['data']?['fg']?['h']?[2]?['c'])
-                                    .toString(),
-                                percentageData: (data['data']?['fg']?['h']?[2]
-                                        ?['v'])
-                                    .toString(),
-                                defineColor: getColorForLastMonth(
-                                    data['data']?['fg']?['h']?[2]?['cc'] ?? ''),
+                                title: ((data.data?.fg?.h?[2].t).toString()),
+                                textData: ((data.data?.fg?.h?[2].c).toString()),
+                                percentageData:
+                                    ((data.data?.fg?.h?[2].v).toString()),
+                                defineColor: getColorFromCode(
+                                  ((data.data?.fg?.h?[2].cc).toString()),
+                                ),
                               ),
                             ],
                           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_page/repo/repo.dart';
 import 'individual_card.dart';
+import '../../../../model/model_one.dart';
+import '../../../repo/repo.dart';
 
 class MCapCard extends StatefulWidget {
   const MCapCard({super.key});
@@ -12,17 +13,17 @@ class MCapCard extends StatefulWidget {
 }
 
 class _MCapCardState extends State<MCapCard> {
-  late Future<Map<String, dynamic>?> _dataFuture;
+  late Future<ModelOne?> _dataFuture;
 
   @override
   void initState() {
     super.initState();
-    _dataFuture = Repo.fetchData();
+    _dataFuture = Repo.accessFirstApi();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String, dynamic>?>(
+    return FutureBuilder<ModelOne?>(
       future: _dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -38,26 +39,26 @@ class _MCapCardState extends State<MCapCard> {
               // *1st card
               IndividualCard(
                 title: 'Total M.cap',
-                value: data['data']?['mc']?['v']?.toString() ?? '404',
-                change: data['data']?['mc']?['c']?.toString() ?? '404',
+                value: data.data?.mc?.v.toString() ?? '404',
+                change: data.data?.mc?.c.toString() ?? '404',
               ),
               // *2nd card
               IndividualCard(
                 title: '24h Vol',
-                value: data['data']?['v']?['v']?.toString() ?? '404',
-                change: data['data']?['v']?['c']?.toString() ?? '404',
+                value: data.data?.v?.v.toString() ?? '404',
+                change: data.data?.v?.c.toString() ?? '404',
               ),
               // *3rd card
               IndividualCard(
                 title: 'BTC.D',
-                value: data['data']?['b']?['v']?.toString() ?? '404',
-                change: data['data']?['b']?['c']?.toString() ?? '404',
+                value: data.data?.b?.v?.toString() ?? '404',
+                change: data.data?.b?.c?.toString() ?? '404',
               ),
               // *4th card
               IndividualCard(
                 title: 'ETH.D',
-                value: data['data']?['e']?['v']?.toString() ?? '404',
-                change: data['data']?['e']?['c']?.toString() ?? '404',
+                value: data.data?.e?.v?.toString() ?? '404',
+                change: data.data?.e?.c?.toString() ?? '404',
               ),
             ],
           );

@@ -1,21 +1,16 @@
 class ModelOne {
   String? key;
-  String? error;
+  Null error;
   Data? data;
 
-  ModelOne({this.key, this.error, this.data}); //? constructor
-
-  //The fromJson method is a factory constructor used to create a Dart object from a JSON Map.
-  ModelOne.fromJson(Map<String, dynamic> json) {
+  ModelOne.changeToDartSyntax(Map<String, dynamic> json) {
     key = json['key'];
     error = json['error'];
-    data = (json['data'] != null) ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
-  //? now JsonModelOne have three fields => key, error, and data.
 
-  //store value in the key
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['key'] = this.key;
     data['error'] = this.error;
     if (this.data != null) {
@@ -24,7 +19,6 @@ class ModelOne {
     return data;
   }
 }
-//toJson is a method used to convert the Dart object to a JSON Map.
 
 class Data {
   Mc? mc;
@@ -32,7 +26,7 @@ class Data {
   Mc? b;
   Mc? e;
   Fg? fg;
-  List<double>? smc;
+  List<int>? smc;
   List<double>? sv;
   List<double>? sb;
   List<double>? se;
@@ -50,33 +44,33 @@ class Data {
   });
 
   Data.fromJson(Map<String, dynamic> json) {
-    mc = (json['mc'] != null) ? new Mc.fromJson(json['mc']) : null;
-    v = (json['v'] != null) ? new Mc.fromJson(json['v']) : null;
-    b = (json['b'] != null) ? new Mc.fromJson(json['b']) : null;
-    e = (json['e'] != null) ? new Mc.fromJson(json['e']) : null;
-    fg = (json['fg'] != null) ? new Fg.fromJson(json['fg']) : null;
-    smc = json['smc'].cast<double>();
+    mc = json['mc'] != null ? new Mc.fromJson(json['mc']) : null;
+    v = json['v'] != null ? new Mc.fromJson(json['v']) : null;
+    b = json['b'] != null ? new Mc.fromJson(json['b']) : null;
+    e = json['e'] != null ? new Mc.fromJson(json['e']) : null;
+    fg = json['fg'] != null ? new Fg.fromJson(json['fg']) : null;
+    smc = json['smc'].cast<int>();
     sv = json['sv'].cast<double>();
     sb = json['sb'].cast<double>();
     se = json['se'].cast<double>();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.mc != null) {
-      data['mc'] = this.mc?.toJson();
+      data['mc'] = this.mc!.toJson();
     }
     if (this.v != null) {
-      data['v'] = this.v?.toJson();
+      data['v'] = this.v!.toJson();
     }
     if (this.b != null) {
-      data['b'] = this.b?.toJson();
+      data['b'] = this.b!.toJson();
     }
     if (this.e != null) {
-      data['e'] = this.e?.toJson();
+      data['e'] = this.e!.toJson();
     }
     if (this.fg != null) {
-      data['fg'] = this.fg?.toJson();
+      data['fg'] = this.fg!.toJson();
     }
     data['smc'] = this.smc;
     data['sv'] = this.sv;
@@ -98,7 +92,7 @@ class Mc {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['v'] = this.v;
     data['c'] = this.c;
     return data;
@@ -106,7 +100,7 @@ class Mc {
 }
 
 class Fg {
-  String? tv;
+  int? tv;
   String? tc;
   List<H>? h;
 
@@ -118,13 +112,13 @@ class Fg {
     if (json['h'] != null) {
       h = <H>[];
       json['h'].forEach((v) {
-        h?.add(new H.fromJson(v));
+        h!.add(new H.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['tv'] = this.tv;
     data['tc'] = this.tc;
     if (this.h != null) {
@@ -150,7 +144,7 @@ class H {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['v'] = this.v;
     data['c'] = this.c;
     data['t'] = this.t;
