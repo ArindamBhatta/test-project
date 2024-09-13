@@ -21,4 +21,24 @@ class Service {
       return null;
     }
   }
+
+  static Future<Map<String, dynamic>?> accessSecondData() async {
+    String url2 = 'https://cp.altsome.com/api/web-home?sys_id=2';
+
+    try {
+      final response = await http.post(Uri.parse(url2));
+
+      if (response.statusCode == 200) {
+        print('Successfully loaded second API data JSON');
+        Map<String, dynamic> data2 = json.decode(response.body);
+        return data2;
+      } else {
+        print('Failed to load data2. Status code: ${response.statusCode}');
+        return null;
+      }
+    } catch (error) {
+      print('Error occurred while loading second API data: $error');
+      return null;
+    }
+  }
 }
