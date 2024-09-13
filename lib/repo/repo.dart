@@ -1,9 +1,9 @@
-import '../service_repo/service.dart';
+import '../service/service.dart';
 
 abstract class Repo {
   static Future<Map<String, dynamic>?> fetchData() async {
     try {
-      Map<String, dynamic>? data = await FetchDataService.fetchData();
+      Map<String, dynamic>? data = await Service.accessFirstData();
       print(data?.length);
       return data;
     } catch (error) {
