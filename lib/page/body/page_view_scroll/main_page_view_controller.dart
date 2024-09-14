@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'second_heading.dart';
-import 'all_text_heading_list.dart';
-import 'card_box_container.dart';
+import 'text_button_heading.dart';
+import 'visible_content_and_toggle_view.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 
 class HeadingContainer extends StatefulWidget {
@@ -63,7 +63,7 @@ class _HeadingContainerState extends State<HeadingContainer> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                AllTextHeadingList(
+                TextButtonHeading(
                   containerText: 'Top 10',
                   buttonBackgroundState: visibleBackground == 0,
                   foregroundColor: getForegroundColor(0)!,
@@ -75,7 +75,7 @@ class _HeadingContainerState extends State<HeadingContainer> {
                     );
                   },
                 ),
-                AllTextHeadingList(
+                TextButtonHeading(
                   containerText: 'Gainers',
                   buttonBackgroundState: visibleBackground == 1,
                   foregroundColor: getForegroundColor(1)!,
@@ -88,7 +88,7 @@ class _HeadingContainerState extends State<HeadingContainer> {
                     );
                   },
                 ),
-                AllTextHeadingList(
+                TextButtonHeading(
                   containerText: 'Losers',
                   buttonBackgroundState: visibleBackground == 2,
                   foregroundColor: getForegroundColor(2)!,
@@ -100,7 +100,7 @@ class _HeadingContainerState extends State<HeadingContainer> {
                     );
                   },
                 ),
-                AllTextHeadingList(
+                TextButtonHeading(
                   containerText: 'Trending',
                   buttonBackgroundState: visibleBackground == 3,
                   foregroundColor: getForegroundColor(3)!,
@@ -112,7 +112,7 @@ class _HeadingContainerState extends State<HeadingContainer> {
                     );
                   },
                 ),
-                AllTextHeadingList(
+                TextButtonHeading(
                   containerText: 'News',
                   buttonBackgroundState: visibleBackground == 4,
                   foregroundColor: getForegroundColor(4)!,
@@ -144,39 +144,39 @@ class _HeadingContainerState extends State<HeadingContainer> {
               children: [
                 Column(
                   children: [
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 0,
                       onVisibilityChanged: () => toggleVisibility(0),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 1,
                       onVisibilityChanged: () => toggleVisibility(1),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 2,
                       onVisibilityChanged: () => toggleVisibility(2),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 3,
                       onVisibilityChanged: () => toggleVisibility(3),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 4,
                       onVisibilityChanged: () => toggleVisibility(4),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 5,
                       onVisibilityChanged: () => toggleVisibility(5),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 7,
                       onVisibilityChanged: () => toggleVisibility(7),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 8,
                       onVisibilityChanged: () => toggleVisibility(8),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 9,
                       onVisibilityChanged: () => toggleVisibility(9),
                     ),
@@ -184,47 +184,47 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 ),
                 Column(
                   children: [
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 10,
                       onVisibilityChanged: () => toggleVisibility(10),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 11,
                       onVisibilityChanged: () => toggleVisibility(11),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 12,
                       onVisibilityChanged: () => toggleVisibility(12),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 13,
                       onVisibilityChanged: () => toggleVisibility(13),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 14,
                       onVisibilityChanged: () => toggleVisibility(14),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 15,
                       onVisibilityChanged: () => toggleVisibility(15),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 16,
                       onVisibilityChanged: () => toggleVisibility(16),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 17,
                       onVisibilityChanged: () => toggleVisibility(17),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 18,
                       onVisibilityChanged: () => toggleVisibility(18),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 19,
                       onVisibilityChanged: () => toggleVisibility(19),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 20,
                       onVisibilityChanged: () => toggleVisibility(20),
                     ),
@@ -232,43 +232,43 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 ),
                 Column(
                   children: [
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 21,
                       onVisibilityChanged: () => toggleVisibility(21),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 22,
                       onVisibilityChanged: () => toggleVisibility(22),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 23,
                       onVisibilityChanged: () => toggleVisibility(23),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 24,
                       onVisibilityChanged: () => toggleVisibility(24),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 25,
                       onVisibilityChanged: () => toggleVisibility(25),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 26,
                       onVisibilityChanged: () => toggleVisibility(26),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 27,
                       onVisibilityChanged: () => toggleVisibility(27),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 28,
                       onVisibilityChanged: () => toggleVisibility(28),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 29,
                       onVisibilityChanged: () => toggleVisibility(29),
                     ),
-                    CardBoxContainer(
+                    VisibleContentAndToggleView(
                       isHiddenDataVisible: visibleCardIndex == 30,
                       onVisibilityChanged: () => toggleVisibility(30),
                     ),

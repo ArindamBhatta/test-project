@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'toggle_data_container.dart';
+import 'hidden_content.dart';
 
-class CardBoxContainer extends StatelessWidget {
-  const CardBoxContainer({
+class VisibleContentAndToggleView extends StatelessWidget {
+  const VisibleContentAndToggleView({
     super.key,
     required this.isHiddenDataVisible,
     required this.onVisibilityChanged,
@@ -151,7 +151,7 @@ class CardBoxContainer extends StatelessWidget {
               ],
             ),
           ),
-          if (isHiddenDataVisible) const ToggleDataContainer(),
+          if (isHiddenDataVisible) const HiddenContent(),
         ],
       ),
     );

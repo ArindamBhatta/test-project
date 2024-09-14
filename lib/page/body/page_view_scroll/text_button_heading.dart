@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AllTextHeadingList extends StatelessWidget {
-  const AllTextHeadingList({
+class TextButtonHeading extends StatelessWidget {
+  const TextButtonHeading({
     super.key,
     required this.containerText,
     required this.buttonBackgroundState,
