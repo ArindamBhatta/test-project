@@ -23,7 +23,8 @@ class Service {
   }
 
   static Future<Map<String, dynamic>?> accessSecondData() async {
-    String url2 = 'https://cp.altsome.com/api/web-home?sys_id=2';
+    String url2 =
+        'https://cp.altsome.com/api/web-home-coins?sys_id=1&currency=usd';
 
     try {
       final response = await http.post(Uri.parse(url2));

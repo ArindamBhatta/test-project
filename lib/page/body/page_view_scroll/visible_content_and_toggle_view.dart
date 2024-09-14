@@ -4,10 +4,19 @@ import 'hidden_content.dart';
 class VisibleContentAndToggleView extends StatelessWidget {
   const VisibleContentAndToggleView({
     super.key,
+    required this.name,
+    required this.shortName,
+    required this.conditionalValue,
+    required this.totalValue,
+    required this.currencyShort,
     required this.isHiddenDataVisible,
     required this.onVisibilityChanged,
   });
-
+  final String name;
+  final String shortName;
+  final String conditionalValue;
+  final String totalValue;
+  final String currencyShort;
   final bool isHiddenDataVisible;
   final VoidCallback onVisibilityChanged;
 
@@ -50,13 +59,13 @@ class VisibleContentAndToggleView extends StatelessWidget {
                             AssetImage("assets/images/bit_coin.png"),
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Bitcoin',
+                            name,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -65,7 +74,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'BTC',
+                                shortName,
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Icon(
@@ -74,7 +83,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
                                 size: 20.0,
                               ),
                               Text(
-                                '0.3919',
+                                conditionalValue,
                                 style: TextStyle(
                                   color: Colors.green,
                                 ),
@@ -88,18 +97,18 @@ class VisibleContentAndToggleView extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '56857.00',
+                          totalValue,
                           style: TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '1.00 BTC',
+                          currencyShort,
                           style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey,
@@ -152,6 +161,14 @@ class VisibleContentAndToggleView extends StatelessWidget {
               ],
             ),
           ),
+          if (isHiddenDataVisible)
+            const SizedBox(
+              width: double.infinity,
+              child: Divider(
+                color: Color.fromARGB(150, 158, 158, 158),
+                thickness: 1.0,
+              ),
+            ),
           if (isHiddenDataVisible) const HiddenContent(),
         ],
       ),

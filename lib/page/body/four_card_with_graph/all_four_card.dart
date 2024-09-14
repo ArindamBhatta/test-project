@@ -27,12 +27,21 @@ class _MCapCardState extends State<MCapCard> {
       future: _dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Container(
+            alignment: Alignment.center,
+            height: 100.0,
+            color: Colors.white,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.0,
+              color: Colors.black,
+            ),
+          );
         } else if (snapshot.hasError) {
-          return const Center(child: Text('Error loading data'));
+          return const Center(
+            child: Text('Error loading data'),
+          );
         } else if (snapshot.hasData && snapshot.data != null) {
           final data = snapshot.data!;
-
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

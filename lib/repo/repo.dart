@@ -7,12 +7,21 @@ abstract class Repo {
     try {
       Map<String, dynamic>? data = await Service.accessFirstData();
       ModelOne modelOne = ModelOne.changeToDartSyntax(data!);
-      print('print one value ${modelOne.data?.mc?.v}');
       return modelOne;
     } catch (error) {
       print('Error fetching data: $error');
     }
 
+    return null;
+  }
+
+  static Future<Map<String, dynamic>?> accessSecondApi() async {
+    try {
+      Map<String, dynamic>? data = await Service.accessSecondData();
+      return data;
+    } catch (error) {
+      print('Error fetching data: $error');
+    }
     return null;
   }
 }
