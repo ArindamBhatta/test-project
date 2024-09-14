@@ -14,13 +14,14 @@ class VisibleContentAndToggleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 2.0),
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
       color: Colors.white,
-      elevation: 1.0,
+      elevation: 1.5,
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
         side: const BorderSide(
-          color: Color.fromARGB(53, 0, 0, 0),
+          color: Color.fromARGB(53, 70, 70, 70),
           width: 1.0,
         ),
       ),

@@ -5,7 +5,7 @@ class SecondHeading extends StatelessWidget {
   @override
   Widget build(context) {
     return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
           '#▲  Name',

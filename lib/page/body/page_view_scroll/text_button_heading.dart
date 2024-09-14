@@ -6,32 +6,28 @@ class TextButtonHeading extends StatelessWidget {
     required this.containerText,
     required this.buttonBackgroundState,
     required this.onButtonPressed,
-    required this.foregroundColor,
   });
 
   final String containerText;
   final bool buttonBackgroundState;
   final VoidCallback onButtonPressed;
-  final Color foregroundColor;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onButtonPressed,
       style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         backgroundColor: buttonBackgroundState ? Colors.blue[800] : null,
-        foregroundColor: foregroundColor,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.0),
         ),
-        animationDuration: const Duration(milliseconds: 1800),
       ),
       child: Text(
         containerText,
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 12,
+          fontSize: 10,
           color: buttonBackgroundState ? Colors.white : Colors.black,
         ),
       ),

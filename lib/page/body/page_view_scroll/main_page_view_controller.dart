@@ -4,16 +4,16 @@ import 'text_button_heading.dart';
 import 'visible_content_and_toggle_view.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 
-class HeadingContainer extends StatefulWidget {
-  const HeadingContainer({super.key});
+class MainPageViewController extends StatefulWidget {
+  const MainPageViewController({super.key});
 
   @override
-  State<HeadingContainer> createState() {
+  State<MainPageViewController> createState() {
     return _HeadingContainerState();
   }
 }
 
-class _HeadingContainerState extends State<HeadingContainer> {
+class _HeadingContainerState extends State<MainPageViewController> {
   int? visibleCardIndex;
   int? visibleBackground = 0;
 
@@ -29,10 +29,6 @@ class _HeadingContainerState extends State<HeadingContainer> {
     setState(() {
       visibleBackground = (visibleBackground == index) ? null : index;
     });
-  }
-
-  Color? getForegroundColor(int index) {
-    return visibleBackground == index ? Colors.black : Colors.black;
   }
 
   @override
@@ -58,6 +54,7 @@ class _HeadingContainerState extends State<HeadingContainer> {
       ),
       child: Column(
         children: [
+          //* 1st TextButton Heading
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: Row(
@@ -66,11 +63,10 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 TextButtonHeading(
                   containerText: 'Top 10',
                   buttonBackgroundState: visibleBackground == 0,
-                  foregroundColor: getForegroundColor(0)!,
                   onButtonPressed: () {
                     ctrl.animateToPage(
                       0,
-                      duration: const Duration(milliseconds: 2000),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.ease,
                     );
                   },
@@ -78,12 +74,10 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 TextButtonHeading(
                   containerText: 'Gainers',
                   buttonBackgroundState: visibleBackground == 1,
-                  foregroundColor: getForegroundColor(1)!,
                   onButtonPressed: () {
-                    //toggleBackground(1);
                     ctrl.animateToPage(
                       1,
-                      duration: const Duration(milliseconds: 2000),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.ease,
                     );
                   },
@@ -91,11 +85,10 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 TextButtonHeading(
                   containerText: 'Losers',
                   buttonBackgroundState: visibleBackground == 2,
-                  foregroundColor: getForegroundColor(2)!,
                   onButtonPressed: () {
                     ctrl.animateToPage(
                       2,
-                      duration: const Duration(milliseconds: 2000),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.ease,
                     );
                   },
@@ -103,11 +96,10 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 TextButtonHeading(
                   containerText: 'Trending',
                   buttonBackgroundState: visibleBackground == 3,
-                  foregroundColor: getForegroundColor(3)!,
                   onButtonPressed: () {
                     ctrl.animateToPage(
                       3,
-                      duration: const Duration(milliseconds: 2000),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.ease,
                     );
                   },
@@ -115,12 +107,10 @@ class _HeadingContainerState extends State<HeadingContainer> {
                 TextButtonHeading(
                   containerText: 'News',
                   buttonBackgroundState: visibleBackground == 4,
-                  foregroundColor: getForegroundColor(4)!,
                   onButtonPressed: () {
-                    //toggleBackground(4);
                     ctrl.animateToPage(
                       4,
-                      duration: const Duration(milliseconds: 2000),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.ease,
                     );
                   },
@@ -128,154 +118,75 @@ class _HeadingContainerState extends State<HeadingContainer> {
               ],
             ),
           ),
+          // *2nd Static heading
           const SecondHeading(),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 6.0,
-              horizontal: 12.0,
-            ),
-            child: ExpandablePageView(
-              onPageChanged: (horizontalScrollValue) async {
-                getForegroundColor(horizontalScrollValue);
-                await Future.delayed(const Duration(milliseconds: 900));
-                toggleBackground(horizontalScrollValue);
-              },
-              controller: ctrl,
-              children: [
-                Column(
+          ExpandablePageView(
+            onPageChanged: (horizontalScrollValue) {
+              toggleBackground(horizontalScrollValue);
+            },
+            controller: ctrl,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
                   children: [
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 0,
-                      onVisibilityChanged: () => toggleVisibility(0),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 1,
-                      onVisibilityChanged: () => toggleVisibility(1),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 2,
-                      onVisibilityChanged: () => toggleVisibility(2),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 3,
-                      onVisibilityChanged: () => toggleVisibility(3),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 4,
-                      onVisibilityChanged: () => toggleVisibility(4),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 5,
-                      onVisibilityChanged: () => toggleVisibility(5),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 7,
-                      onVisibilityChanged: () => toggleVisibility(7),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 8,
-                      onVisibilityChanged: () => toggleVisibility(8),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 9,
-                      onVisibilityChanged: () => toggleVisibility(9),
-                    ),
+                    for (int i = 1; i <= 10; i++)
+                      VisibleContentAndToggleView(
+                        isHiddenDataVisible: visibleCardIndex == i,
+                        onVisibilityChanged: () => toggleVisibility(i),
+                      ),
                   ],
                 ),
-                Column(
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
                   children: [
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 10,
-                      onVisibilityChanged: () => toggleVisibility(10),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 11,
-                      onVisibilityChanged: () => toggleVisibility(11),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 12,
-                      onVisibilityChanged: () => toggleVisibility(12),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 13,
-                      onVisibilityChanged: () => toggleVisibility(13),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 14,
-                      onVisibilityChanged: () => toggleVisibility(14),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 15,
-                      onVisibilityChanged: () => toggleVisibility(15),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 16,
-                      onVisibilityChanged: () => toggleVisibility(16),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 17,
-                      onVisibilityChanged: () => toggleVisibility(17),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 18,
-                      onVisibilityChanged: () => toggleVisibility(18),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 19,
-                      onVisibilityChanged: () => toggleVisibility(19),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 20,
-                      onVisibilityChanged: () => toggleVisibility(20),
-                    ),
+                    for (int i = 11; i <= 20; i++)
+                      VisibleContentAndToggleView(
+                        isHiddenDataVisible: visibleCardIndex == i,
+                        onVisibilityChanged: () => toggleVisibility(i),
+                      ),
                   ],
                 ),
-                Column(
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
                   children: [
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 21,
-                      onVisibilityChanged: () => toggleVisibility(21),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 22,
-                      onVisibilityChanged: () => toggleVisibility(22),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 23,
-                      onVisibilityChanged: () => toggleVisibility(23),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 24,
-                      onVisibilityChanged: () => toggleVisibility(24),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 25,
-                      onVisibilityChanged: () => toggleVisibility(25),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 26,
-                      onVisibilityChanged: () => toggleVisibility(26),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 27,
-                      onVisibilityChanged: () => toggleVisibility(27),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 28,
-                      onVisibilityChanged: () => toggleVisibility(28),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 29,
-                      onVisibilityChanged: () => toggleVisibility(29),
-                    ),
-                    VisibleContentAndToggleView(
-                      isHiddenDataVisible: visibleCardIndex == 30,
-                      onVisibilityChanged: () => toggleVisibility(30),
-                    ),
+                    for (int i = 21; i <= 30; i++)
+                      VisibleContentAndToggleView(
+                        isHiddenDataVisible: visibleCardIndex == i,
+                        onVisibilityChanged: () => toggleVisibility(i),
+                      ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    for (int i = 31; i <= 40; i++)
+                      VisibleContentAndToggleView(
+                        isHiddenDataVisible: visibleCardIndex == i,
+                        onVisibilityChanged: () => toggleVisibility(i),
+                      ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    for (int i = 41; i <= 50; i++)
+                      VisibleContentAndToggleView(
+                        isHiddenDataVisible: visibleCardIndex == i,
+                        onVisibilityChanged: () => toggleVisibility(i),
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

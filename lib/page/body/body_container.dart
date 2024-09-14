@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_page/page/header_footer/last_navbar.dart';
-import 'page_view_scroll/heading_container.dart';
+import 'page_view_scroll/main_page_view_controller.dart';
 
 import 'ten_button/all_navigation_button.dart';
 import 'fear_and_green_indicator/fear_and_greed_controller.dart';
@@ -47,7 +47,7 @@ class _BodyContainerState extends State<BodyContainer> {
                 ),
               ),
               SizedBox(height: 6.0),
-              HeadingContainer(),
+              MainPageViewController(),
             ],
           ),
         ),
