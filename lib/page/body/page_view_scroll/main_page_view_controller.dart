@@ -30,7 +30,6 @@ class _HeadingContainerState extends State<MainPageViewController> {
   Future<Map<String, dynamic>?> accessSecondApi() async {
     try {
       Map<String, dynamic>? resolvedData = await Repo.accessSecondApi();
-      print("Accessing from dart key ➡️➡️${resolvedData?['data']?['tt']}");
       return resolvedData;
     } catch (error) {
       print("Error occurred: $error");
@@ -50,26 +49,40 @@ class _HeadingContainerState extends State<MainPageViewController> {
     });
   }
 
+  Widget buildContentView(
+      {required List<dynamic> items, required Map<String, dynamic>? details}) {
+    return Column(
+      children: [
+        for (int i = 0; i < items.length; i++)
+          VisibleContentAndToggleView(
+            cardNumber: items[i].toString(),
+            name: details?[items[i].toString()]?['n'] ?? 'Unknown',
+            shortName: details?[items[i].toString()]?['s'] ?? 'Unknown',
+            totalValue: details?[items[i].toString()]?['l'] ?? 'Unknown',
+            currencyShort: details?[items[i].toString()]?['ts'] ?? 0,
+            conditionalValue: details?[items[i].toString()]?['p1'] ?? 0,
+            isHiddenDataVisible: visibleCardIndex == i,
+            onVisibilityChanged: () => toggleVisibility(i),
+          ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+
     return FutureBuilder<Map<String, dynamic>?>(
       future: _dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(
-              alignment: Alignment.center,
-              height: 100.0,
-              color: Colors.white,
-              child: CircularProgressIndicator(
-                strokeWidth: 2.0,
-                color: Colors.black,
-              ));
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (snapshot.hasData) {
           final data = snapshot.data!;
-          print("print data in UI ➡️" + (data['data']?['tt']).toString());
+          final details = data['data']?['details'];
+
           return Container(
             width: screenWidth,
             decoration: const BoxDecoration(
@@ -94,61 +107,24 @@ class _HeadingContainerState extends State<MainPageViewController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextButtonHeading(
-                        containerText: 'Top 10',
-                        buttonBackgroundState: visibleBackground == 0,
-                        onButtonPressed: () {
-                          ctrl.animateToPage(
-                            0,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.ease,
-                          );
-                        },
-                      ),
-                      TextButtonHeading(
-                        containerText: 'Gainers',
-                        buttonBackgroundState: visibleBackground == 1,
-                        onButtonPressed: () {
-                          ctrl.animateToPage(
-                            1,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.ease,
-                          );
-                        },
-                      ),
-                      TextButtonHeading(
-                        containerText: 'Losers',
-                        buttonBackgroundState: visibleBackground == 2,
-                        onButtonPressed: () {
-                          ctrl.animateToPage(
-                            2,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.ease,
-                          );
-                        },
-                      ),
-                      TextButtonHeading(
-                        containerText: 'Trending',
-                        buttonBackgroundState: visibleBackground == 3,
-                        onButtonPressed: () {
-                          ctrl.animateToPage(
-                            3,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.ease,
-                          );
-                        },
-                      ),
-                      TextButtonHeading(
-                        containerText: 'News',
-                        buttonBackgroundState: visibleBackground == 4,
-                        onButtonPressed: () {
-                          ctrl.animateToPage(
-                            4,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.ease,
-                          );
-                        },
-                      ),
+                      for (int i = 0; i < 5; i++)
+                        TextButtonHeading(
+                          containerText: [
+                            'Top 10',
+                            'Gainers',
+                            'Losers',
+                            'Trending',
+                            'News'
+                          ][i],
+                          buttonBackgroundState: visibleBackground == i,
+                          onButtonPressed: () {
+                            ctrl.animateToPage(
+                              i,
+                              duration: const Duration(milliseconds: 100),
+                              curve: Curves.ease,
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),
@@ -161,87 +137,37 @@ class _HeadingContainerState extends State<MainPageViewController> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          for (int i = 1; i <= (data['data']['tt'].length); i++)
-                            VisibleContentAndToggleView(
-                              name: 'BitCoin',
-                              shortName: 'BTC',
-                              conditionalValue: '0.3919',
-                              totalValue: '568756.00',
-                              currencyShort: '1.00',
-                              isHiddenDataVisible: visibleCardIndex == i,
-                              onVisibilityChanged: () => toggleVisibility(i),
-                            ),
-                        ],
+                      child: buildContentView(
+                        items: data['data']['tt'], // Top 10 items
+                        details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          for (int i = 11; i <= 20; i++)
-                            VisibleContentAndToggleView(
-                              name: 'HitCoin',
-                              shortName: 'BTC',
-                              conditionalValue: '0.3919',
-                              totalValue: '568756.00',
-                              currencyShort: '1.00',
-                              isHiddenDataVisible: visibleCardIndex == i,
-                              onVisibilityChanged: () => toggleVisibility(i),
-                            ),
-                        ],
+                      child: buildContentView(
+                        items: data['data']['tg'], // Gainers items
+                        details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          for (int i = 21; i <= 30; i++)
-                            VisibleContentAndToggleView(
-                              name: 'Ethereum',
-                              shortName: 'BTC',
-                              conditionalValue: '0.3919',
-                              totalValue: '568756.00',
-                              currencyShort: '1.00',
-                              isHiddenDataVisible: visibleCardIndex == i,
-                              onVisibilityChanged: () => toggleVisibility(i),
-                            ),
-                        ],
+                      child: buildContentView(
+                        items: data['data']['tl'], // Losers items
+                        details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          for (int i = 31; i <= 40; i++)
-                            VisibleContentAndToggleView(
-                              name: 'Tether',
-                              shortName: 'BTC',
-                              conditionalValue: '0.3919',
-                              totalValue: '568756.00',
-                              currencyShort: '1.00',
-                              isHiddenDataVisible: visibleCardIndex == i,
-                              onVisibilityChanged: () => toggleVisibility(i),
-                            ),
-                        ],
+                      child: buildContentView(
+                        items: data['data']['tr'], // Trending items
+                        details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          for (int i = 41; i <= 50; i++)
-                            VisibleContentAndToggleView(
-                              name: 'BNB',
-                              shortName: 'BTC',
-                              conditionalValue: '0.3919',
-                              totalValue: '568756.00',
-                              currencyShort: '1.00',
-                              isHiddenDataVisible: visibleCardIndex == i,
-                              onVisibilityChanged: () => toggleVisibility(i),
-                            ),
-                        ],
+                      child: buildContentView(
+                        items: data['data']['rt'], // News items
+                        details: details,
                       ),
                     ),
                   ],

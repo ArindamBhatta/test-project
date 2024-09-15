@@ -4,6 +4,7 @@ import 'hidden_content.dart';
 class VisibleContentAndToggleView extends StatelessWidget {
   const VisibleContentAndToggleView({
     super.key,
+    required this.cardNumber,
     required this.name,
     required this.shortName,
     required this.conditionalValue,
@@ -12,11 +13,12 @@ class VisibleContentAndToggleView extends StatelessWidget {
     required this.isHiddenDataVisible,
     required this.onVisibilityChanged,
   });
+  final String cardNumber;
   final String name;
   final String shortName;
-  final String conditionalValue;
+  final conditionalValue;
   final String totalValue;
-  final String currencyShort;
+  final currencyShort;
   final bool isHiddenDataVisible;
   final VoidCallback onVisibilityChanged;
 
@@ -40,124 +42,143 @@ class VisibleContentAndToggleView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 4.0,
-                        ),
-                      ),
-                      child: const CircleAvatar(
-                        radius: 16.0,
-                        backgroundImage:
-                            AssetImage("assets/images/bit_coin.png"),
+                    Text(
+                      cardNumber,
+                      style: const TextStyle(
+                        fontSize: 12.0,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    Icon(Icons.star_border_outlined),
+                  ],
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            name,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 4.0,
+                              ),
+                            ),
+                            child: const CircleAvatar(
+                              radius: 16.0,
+                              backgroundImage:
+                                  AssetImage("assets/images/bit_coin.png"),
                             ),
                           ),
-                          Row(
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  name,
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      shortName,
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_drop_up_sharp,
+                                      color: Colors.green,
+                                      size: 20.0,
+                                    ),
+                                    Text(
+                                      '$conditionalValue',
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                shortName,
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              Icon(
-                                Icons.arrow_drop_up_sharp,
-                                color: Colors.green,
-                                size: 20.0,
+                                totalValue,
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
-                                conditionalValue,
+                                '$currencyShort',
                                 style: TextStyle(
-                                  color: Colors.green,
+                                  fontSize: 10.0,
+                                  color: Colors.grey,
                                 ),
                               ),
                             ],
                           ),
+                          const SizedBox(width: 10.0),
+                          Container(
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isHiddenDataVisible
+                                  ? Colors.blue[800]
+                                  : Colors.white,
+                              border: Border.all(
+                                color: Colors.black,
+                                width: isHiddenDataVisible ? 1.0 : 0.5,
+                              ),
+                            ),
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                minimumSize: Size.zero,
+                              ),
+                              onPressed: onVisibilityChanged,
+                              child: Center(
+                                child: isHiddenDataVisible
+                                    ? const Text(
+                                        '-',
+                                        style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Text(
+                                        '+',
+                                        style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          totalValue,
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          currencyShort,
-                          style: TextStyle(
-                            fontSize: 10.0,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 10.0),
-                    Container(
-                      width: 25,
-                      height: 25,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isHiddenDataVisible
-                            ? Colors.blue[800]
-                            : Colors.white,
-                        border: Border.all(
-                          color: Colors.black,
-                          width: isHiddenDataVisible ? 1.0 : 0.5,
-                        ),
-                      ),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: Size.zero,
-                        ),
-                        onPressed: onVisibilityChanged,
-                        child: Center(
-                          child: isHiddenDataVisible
-                              ? const Text(
-                                  '-',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : const Text(
-                                  '+',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
