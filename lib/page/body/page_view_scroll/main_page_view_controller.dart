@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:home_page/model/model_two.dart';
+
 import '../../../repo/repo.dart';
 import 'package:flutter/material.dart';
 import 'second_heading.dart';
@@ -18,7 +20,7 @@ class MainPageViewController extends StatefulWidget {
 class _HeadingContainerState extends State<MainPageViewController> {
   int? visibleCardIndex;
   int? visibleBackground = 0;
-  late Future<Map<String, dynamic>?> _dataFuture;
+  late Future<ModelTwo?> _dataFuture;
   PageController ctrl = PageController();
 
   @override
@@ -27,9 +29,9 @@ class _HeadingContainerState extends State<MainPageViewController> {
     _dataFuture = accessSecondApi();
   }
 
-  Future<Map<String, dynamic>?> accessSecondApi() async {
+  Future<ModelTwo?> accessSecondApi() async {
     try {
-      Map<String, dynamic>? resolvedData = await Repo.accessSecondApi();
+      ModelTwo? resolvedData = await Repo.accessSecondApi();
       return resolvedData;
     } catch (error) {
       print("Error occurred: $error");
@@ -49,18 +51,20 @@ class _HeadingContainerState extends State<MainPageViewController> {
     });
   }
 
-  Widget buildContentView(
-      {required List<dynamic> items, required Map<String, dynamic>? details}) {
+  Widget buildContentView({
+    required List<dynamic> items,
+    required Map<String, dynamic>? details,
+  }) {
     return Column(
       children: [
         for (int i = 0; i < items.length; i++)
           VisibleContentAndToggleView(
             cardNumber: items[i].toString(),
-            name: details?[items[i].toString()]?['n'] ?? 'Unknown',
-            shortName: details?[items[i].toString()]?['s'] ?? 'Unknown',
-            totalValue: details?[items[i].toString()]?['l'] ?? 'Unknown',
-            currencyShort: details?[items[i].toString()]?['ts'] ?? 0,
-            conditionalValue: details?[items[i].toString()]?['p1'] ?? 0,
+            name: details?[items[i].toString()]?.n ?? 'Unknown',
+            shortName: details?[items[i].toString()]?.s ?? 'Unknown',
+            totalValue: details?[items[i].toString()]?.l ?? 'Unknown',
+            currencyShort: details?[items[i].toString()]?.ts ?? 0,
+            conditionalValue: details?[items[i].toString()]?.p1 ?? 0,
             isHiddenDataVisible: visibleCardIndex == i,
             onVisibilityChanged: () => toggleVisibility(i),
           ),
@@ -72,7 +76,7 @@ class _HeadingContainerState extends State<MainPageViewController> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return FutureBuilder<Map<String, dynamic>?>(
+    return FutureBuilder<ModelTwo?>(
       future: _dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -81,7 +85,7 @@ class _HeadingContainerState extends State<MainPageViewController> {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (snapshot.hasData) {
           final data = snapshot.data!;
-          final details = data['data']?['details'];
+          final details = data.data?.details;
 
           return Container(
             width: screenWidth,
@@ -138,35 +142,35 @@ class _HeadingContainerState extends State<MainPageViewController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: buildContentView(
-                        items: data['data']['tt'], // Top 10 items
+                        items: data.data?.tt,
                         details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: buildContentView(
-                        items: data['data']['tg'], // Gainers items
+                        items: data.data!.tt, // Gainers items
                         details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: buildContentView(
-                        items: data['data']['tl'], // Losers items
+                        items: data.data!.tr,
                         details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: buildContentView(
-                        items: data['data']['tr'], // Trending items
+                        items: data.data!.tl,
                         details: details,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: buildContentView(
-                        items: data['data']['rt'], // News items
+                        items: data.data!.rt,
                         details: details,
                       ),
                     ),

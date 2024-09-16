@@ -16,13 +16,13 @@ abstract class Repo {
     return null;
   }
 
-  static Future<Map<String, dynamic>?> accessSecondApi() async {
+  static Future<ModelTwo?> accessSecondApi() async {
     try {
       Map<String, dynamic>? data = await Service.accessSecondData();
       ModelTwo modelTwo = ModelTwo.fromJson(data!);
       print("access from dart ${modelTwo.data!.tt}");
       print("access from dart key ${modelTwo.data!.details!['1']?.sg}");
-      return data;
+      return modelTwo;
     } catch (error) {
       print('Error fetching data: $error');
     }

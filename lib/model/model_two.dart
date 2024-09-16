@@ -1,7 +1,7 @@
 class ModelTwo {
-  String? key;
-  String? error;
-  Data? data;
+  var key;
+  var error;
+  var data;
 
   ModelTwo.fromJson(Map<String, dynamic> json) {
     key = json['key'];
@@ -21,19 +21,19 @@ class ModelTwo {
 }
 
 class Data {
-  List<dynamic>? tt;
-  List<dynamic>? tr;
-  List<dynamic>? tg;
-  List<dynamic>? tl;
-  List<dynamic>? rt;
-  Map<String, Detail>? details;
+  var tt;
+  var tr;
+  var tg;
+  var tl;
+  var rt;
+  var details;
 
   Data.fromJson(Map<String, dynamic> json) {
-    tt = List<int>.from(json['tt']);
-    tr = List<int>.from(json['tr']);
-    tg = List<int>.from(json['tg']);
-    tl = List<int>.from(json['tl']);
-    rt = List<int>.from(json['rt']);
+    tt = json['tt'];
+    tr = json['tr'];
+    tg = json['tg'];
+    tl = json['tl'];
+    rt = json['rt'];
 
     if (json['details'] != null) {
       details = (json['details'] as Map<String, dynamic>)
@@ -58,26 +58,27 @@ class Data {
 
 class Detail {
   var id;
-  String? sg;
-  String? s;
-  String? n;
+  var sg;
+  var s;
+  var n;
   var ms;
   var cs;
   var ts;
-  String? p;
+  var p;
   var mc;
   var r;
-  int? p1;
-  int? p7;
-  int? p30;
+  var p1;
+  var p7;
+  var p30;
   var v;
   var fdv;
-  String? o;
-  String? h;
-  String? l;
-  int? mcp;
+  var o;
+  var h;
+  var l;
+  var mcp;
   var vp;
-  List<dynamic>? sl;
+  var sl;
+
   Detail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sg = json['sg'];
@@ -90,7 +91,6 @@ class Detail {
     mc = json['mc'];
     r = json['r'];
 
-    // Handle the case where the number could be a double
     p1 = (json['p1'] is int) ? json['p1'] : (json['p1'] as num?)?.toInt();
     p7 = (json['p7'] is int) ? json['p7'] : (json['p7'] as num?)?.toInt();
     p30 = (json['p30'] is int) ? json['p30'] : (json['p30'] as num?)?.toInt();
@@ -101,12 +101,9 @@ class Detail {
     h = json['h'];
     l = json['l'];
 
-    // Handle mcp similarly
     mcp = (json['mcp'] is int) ? json['mcp'] : (json['mcp'] as num?)?.toInt();
 
     vp = json['vp'];
-
-    // Convert 'sl' list elements to doubles
     sl = (json['sl'] as List?)?.map((e) => (e as num).toDouble()).toList();
   }
 
