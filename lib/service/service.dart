@@ -42,4 +42,24 @@ class Service {
       return null;
     }
   }
+
+  static Future<Map<String, dynamic>?> accessSectorsData() async {
+    String url3 = 'https://cp.altsome.com/api/web-sectors?sys_id=1';
+
+    try {
+      final response = await http.post(Uri.parse(url3));
+
+      if (response.statusCode == 200) {
+        print('Successfully loaded Sectors API data JSON');
+        Map<String, dynamic> data3 = json.decode(response.body);
+        return data3;
+      } else {
+        print('Failed to load Sectors. Status code: ${response.statusCode}');
+        return null;
+      }
+    } catch (error) {
+      print('Error occurred while loading second API data: $error');
+      return null;
+    }
+  }
 }

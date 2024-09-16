@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class AllTenButtonIcons extends StatelessWidget {
-  const AllTenButtonIcons({
+class ButtonIcons extends StatelessWidget {
+  const ButtonIcons({
     super.key,
     required this.icon,
     required this.text,
+    required this.onPress,
   });
 
   final IconData icon;
   final String text;
+  final VoidCallback? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class AllTenButtonIcons extends StatelessWidget {
         SizedBox(
           width: 65.0,
           child: TextButton(
-            onPressed: () {},
+            onPressed: onPress,
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
               minimumSize: const Size(40, 20),
