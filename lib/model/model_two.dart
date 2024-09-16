@@ -1,171 +1,138 @@
 class ModelTwo {
-  final String key;
-  final String error;
-  final Data data;
+  String? key;
+  String? error;
+  Data? data;
 
-  ModelTwo({
-    required this.key,
-    required this.error,
-    required this.data,
-  });
-
-  factory ModelTwo.fromJson(Map<String, dynamic> json) {
-    return ModelTwo(
-      key: json['key'],
-      error: json['error'],
-      data: Data.fromJson(json['data']),
-    );
+  ModelTwo.fromJson(Map<String, dynamic> json) {
+    key = json['key'];
+    error = json['error'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'key': key,
-      'error': error,
-      'data': data.toJson(),
-    };
+    final Map<String, dynamic> data = {};
+    data['key'] = this.key;
+    data['error'] = this.error;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
   }
 }
 
 class Data {
-  final List<int> tt;
-  final List<int> tr;
-  final List<int> tg;
-  final List<int> tl;
-  final List<int> rt;
-  final Map<String, Details> details;
+  List<dynamic>? tt;
+  List<dynamic>? tr;
+  List<dynamic>? tg;
+  List<dynamic>? tl;
+  List<dynamic>? rt;
+  Map<String, Detail>? details;
 
-  Data({
-    required this.tt,
-    required this.tr,
-    required this.tg,
-    required this.tl,
-    required this.rt,
-    required this.details,
-  });
+  Data.fromJson(Map<String, dynamic> json) {
+    tt = List<int>.from(json['tt']);
+    tr = List<int>.from(json['tr']);
+    tg = List<int>.from(json['tg']);
+    tl = List<int>.from(json['tl']);
+    rt = List<int>.from(json['rt']);
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    var detailsMap = (json['details'] as Map<String, dynamic>).map(
-      (key, value) => MapEntry(key, Details.fromJson(value)),
-    );
-
-    return Data(
-      tt: List<int>.from(json['tt']),
-      tr: List<int>.from(json['tr']),
-      tg: List<int>.from(json['tg']),
-      tl: List<int>.from(json['tl']),
-      rt: List<int>.from(json['rt']),
-      details: detailsMap,
-    );
+    if (json['details'] != null) {
+      details = (json['details'] as Map<String, dynamic>)
+          .map((key, value) => MapEntry(key, Detail.fromJson(value)));
+    }
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'tt': tt,
-      'tr': tr,
-      'tg': tg,
-      'tl': tl,
-      'rt': rt,
-      'details': details.map((key, value) => MapEntry(key, value.toJson())),
-    };
+    final Map<String, dynamic> data = {};
+    data['tt'] = this.tt;
+    data['tr'] = this.tr;
+    data['tg'] = this.tg;
+    data['tl'] = this.tl;
+    data['rt'] = this.rt;
+    if (this.details != null) {
+      data['details'] =
+          this.details!.map((key, value) => MapEntry(key, value.toJson()));
+    }
+    return data;
   }
 }
 
-class Details {
-  final int id;
-  final String sg;
-  final String s;
-  final String n;
-  final int? ms;
-  final double cs;
-  final double ts;
-  final String p;
-  final int mc;
-  final int r;
-  final double p1;
-  final double p7;
-  final double p30;
-  final int v;
-  final int fdv;
-  final String o;
-  final String h;
-  final String l;
-  final double mcp;
-  final double vp;
-  final List<double> sl;
+class Detail {
+  var id;
+  String? sg;
+  String? s;
+  String? n;
+  var ms;
+  var cs;
+  var ts;
+  String? p;
+  var mc;
+  var r;
+  int? p1;
+  int? p7;
+  int? p30;
+  var v;
+  var fdv;
+  String? o;
+  String? h;
+  String? l;
+  int? mcp;
+  var vp;
+  List<dynamic>? sl;
+  Detail.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    sg = json['sg'];
+    s = json['s'];
+    n = json['n'];
+    ms = json['ms'];
+    cs = json['cs'];
+    ts = json['ts'];
+    p = json['p'];
+    mc = json['mc'];
+    r = json['r'];
 
-  Details({
-    required this.id,
-    required this.sg,
-    required this.s,
-    required this.n,
-    required this.ms,
-    required this.cs,
-    required this.ts,
-    required this.p,
-    required this.mc,
-    required this.r,
-    required this.p1,
-    required this.p7,
-    required this.p30,
-    required this.v,
-    required this.fdv,
-    required this.o,
-    required this.h,
-    required this.l,
-    required this.mcp,
-    required this.vp,
-    required this.sl,
-  });
+    // Handle the case where the number could be a double
+    p1 = (json['p1'] is int) ? json['p1'] : (json['p1'] as num?)?.toInt();
+    p7 = (json['p7'] is int) ? json['p7'] : (json['p7'] as num?)?.toInt();
+    p30 = (json['p30'] is int) ? json['p30'] : (json['p30'] as num?)?.toInt();
 
-  factory Details.fromJson(Map<String, dynamic> json) {
-    return Details(
-      id: json['id'],
-      sg: json['sg'],
-      s: json['s'],
-      n: json['n'],
-      ms: json['ms'],
-      cs: (json['cs'] as num).toDouble(),
-      ts: (json['ts'] as num).toDouble(),
-      p: json['p'],
-      mc: json['mc'],
-      r: json['r'],
-      p1: (json['p1'] as num).toDouble(),
-      p7: (json['p7'] as num).toDouble(),
-      p30: (json['p30'] as num).toDouble(),
-      v: json['v'],
-      fdv: json['fdv'],
-      o: json['o'],
-      h: json['h'],
-      l: json['l'],
-      mcp: (json['mcp'] as num).toDouble(),
-      vp: (json['vp'] as num).toDouble(),
-      sl: List<double>.from(json['sl'].map((x) => (x as num).toDouble())),
-    );
+    v = json['v'];
+    fdv = json['fdv'];
+    o = json['o'];
+    h = json['h'];
+    l = json['l'];
+
+    // Handle mcp similarly
+    mcp = (json['mcp'] is int) ? json['mcp'] : (json['mcp'] as num?)?.toInt();
+
+    vp = json['vp'];
+
+    // Convert 'sl' list elements to doubles
+    sl = (json['sl'] as List?)?.map((e) => (e as num).toDouble()).toList();
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'sg': sg,
-      's': s,
-      'n': n,
-      'ms': ms,
-      'cs': cs,
-      'ts': ts,
-      'p': p,
-      'mc': mc,
-      'r': r,
-      'p1': p1,
-      'p7': p7,
-      'p30': p30,
-      'v': v,
-      'fdv': fdv,
-      'o': o,
-      'h': h,
-      'l': l,
-      'mcp': mcp,
-      'vp': vp,
-      'sl': sl,
-    };
+    final Map<String, dynamic> data = {};
+    data['id'] = this.id;
+    data['sg'] = this.sg;
+    data['s'] = this.s;
+    data['n'] = this.n;
+    data['ms'] = this.ms;
+    data['cs'] = this.cs;
+    data['ts'] = this.ts;
+    data['p'] = this.p;
+    data['mc'] = this.mc;
+    data['r'] = this.r;
+    data['p1'] = this.p1;
+    data['p7'] = this.p7;
+    data['p30'] = this.p30;
+    data['v'] = this.v;
+    data['fdv'] = this.fdv;
+    data['o'] = this.o;
+    data['h'] = this.h;
+    data['l'] = this.l;
+    data['mcp'] = this.mcp;
+    data['vp'] = this.vp;
+    data['sl'] = this.sl;
+    return data;
   }
 }

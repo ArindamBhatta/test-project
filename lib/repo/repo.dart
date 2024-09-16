@@ -1,3 +1,5 @@
+import 'package:home_page/model/model_two.dart';
+
 import '../model/model_one.dart';
 import '../service/service.dart';
 
@@ -17,7 +19,9 @@ abstract class Repo {
   static Future<Map<String, dynamic>?> accessSecondApi() async {
     try {
       Map<String, dynamic>? data = await Service.accessSecondData();
-      print((data?['data']['details']['1']['mc']).runtimeType);
+      ModelTwo modelTwo = ModelTwo.fromJson(data!);
+      print("access from dart ${modelTwo.data!.tt}");
+      print("access from dart key ${modelTwo.data!.details!['1']?.sg}");
       return data;
     } catch (error) {
       print('Error fetching data: $error');

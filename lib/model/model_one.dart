@@ -1,16 +1,18 @@
 class ModelOne {
   String? key;
-  Null error;
+  String? error;
   Data? data;
 
-  ModelOne.changeToDartSyntax(Map<String, dynamic> json) {
-    key = json['key'];
-    error = json['error'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  ModelOne.changeToDartSyntax(Map<String, dynamic> jsonAssign) {
+    this.key = jsonAssign['key'] as String? ?? '';
+    this.error = jsonAssign['error'] as String? ?? '';
+    this.data = jsonAssign['data'] != null
+        ? new Data.changeToDartSyntax(jsonAssign['data'])
+        : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  Map<String, dynamic> jsonReturn() {
+    final Map<String, dynamic> data = {};
     data['key'] = this.key;
     data['error'] = this.error;
     if (this.data != null) {
@@ -43,7 +45,7 @@ class Data {
     this.se,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Data.changeToDartSyntax(Map<String, dynamic> json) {
     mc = json['mc'] != null ? new Mc.fromJson(json['mc']) : null;
     v = json['v'] != null ? new Mc.fromJson(json['v']) : null;
     b = json['b'] != null ? new Mc.fromJson(json['b']) : null;
@@ -134,13 +136,11 @@ class H {
   String? t;
   String? cc;
 
-  H({this.v, this.c, this.t, this.cc});
-
   H.fromJson(Map<String, dynamic> json) {
-    v = json['v'];
-    c = json['c'];
-    t = json['t'];
-    cc = json['cc'];
+    this.v = json['v'] as int? ?? 0;
+    this.c = json['c'] as String? ?? '';
+    this.t = json['t'] as String? ?? '';
+    this.cc = json['cc'] as String? ?? '';
   }
 
   Map<String, dynamic> toJson() {
