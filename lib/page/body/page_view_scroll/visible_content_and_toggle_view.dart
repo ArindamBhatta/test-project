@@ -24,6 +24,18 @@ class VisibleContentAndToggleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String currencyChange() {
+      if (currencyShort > 1000000000) {
+        return '${(currencyShort / 1000000000).toStringAsFixed(2)}T';
+      } else if (currencyShort > 1000000) {
+        return '${(currencyShort / 1000).toStringAsFixed(2)}M';
+      } else if (currencyShort > 1000) {
+        return '${(currencyShort / 1000).toStringAsFixed(2)}K';
+      } else {
+        return currencyShort.toString();
+      }
+    }
+
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 6.0),
       color: Colors.white,
@@ -60,7 +72,6 @@ class VisibleContentAndToggleView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -78,46 +89,50 @@ class VisibleContentAndToggleView extends StatelessWidget {
                                     AssetImage("assets/images/bit_coin.png"),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    name,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w500,
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      name,
+                                      softWrap: false,
+                                      overflow:
+                                          TextOverflow.fade, //* apply hear
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        shortName,
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_drop_up_sharp,
-                                        color: Colors.green,
-                                        size: 20.0,
-                                      ),
-                                      Text(
-                                        '$conditionalValue',
-                                        style: TextStyle(
-                                          color: Colors.green,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          shortName,
+                                          style: TextStyle(color: Colors.grey),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                        Icon(
+                                          Icons.arrow_drop_up_sharp,
+                                          color: Colors.green,
+                                          size: 20.0,
+                                        ),
+                                        Text(
+                                          '$conditionalValue',
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                       Expanded(
-                        flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -132,7 +147,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  '$currencyShort',
+                                  currencyChange(),
                                   style: TextStyle(
                                     fontSize: 10.0,
                                     color: Colors.grey,
@@ -185,7 +200,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

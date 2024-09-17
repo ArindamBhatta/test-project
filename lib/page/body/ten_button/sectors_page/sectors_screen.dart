@@ -11,7 +11,7 @@ class SectorsScreen extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            color: Color.fromARGB(255, 8, 127, 224),
+            color: Color.fromARGB(255, 7, 145, 237),
             padding: const EdgeInsets.only(top: 25.0, bottom: 8.0),
             child: const Navbar(),
           ),

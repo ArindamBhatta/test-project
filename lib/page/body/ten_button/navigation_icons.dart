@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'sectors_page/sectors_page.dart';
+import 'sectors_page/sectors_screen.dart';
 import 'button_icons.dart';
 
 class NavigationIcons extends StatefulWidget {
