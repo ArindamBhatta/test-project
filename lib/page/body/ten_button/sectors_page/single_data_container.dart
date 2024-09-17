@@ -4,7 +4,6 @@ import 'hidden_data_container.dart';
 class SingleDataContainer extends StatefulWidget {
   const SingleDataContainer({
     super.key,
-    required this.icon,
     required this.containerName,
     required this.avgChange,
     required this.avgChangePositive,
@@ -20,7 +19,6 @@ class SingleDataContainer extends StatefulWidget {
     required this.onVisibilityChanged,
   });
 
-  final IconData icon;
   final String containerName;
   final String avgChange;
   final bool avgChangePositive;
@@ -49,42 +47,49 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 6.0),
       elevation: 1.5,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
         side: const BorderSide(
-          color: Color.fromARGB(255, 255, 255, 255),
-          width: 1.0,
+          color: Color.fromARGB(255, 13, 13, 13),
+          width: 0.5,
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-              top: 6.0,
-              bottom: 6.0,
-            ),
+            padding: const EdgeInsets.all(8.0),
+            //* parent Row Store visible card data
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Icon(widget.icon, size: 34.0),
-                    const SizedBox(width: 8.0),
-                    Text(
-                      widget.containerName,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w700,
+                //* 1st child Store icon and name
+                Expanded(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.sports_soccer_rounded,
+                        size: 34.0,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 8.0),
+                      Expanded(
+                        child: Text(
+                          widget.containerName,
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 10.0),
+                //* 2nd child Store % change and toggle button
                 Row(
                   children: [
                     Column(

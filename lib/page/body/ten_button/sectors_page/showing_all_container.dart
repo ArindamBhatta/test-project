@@ -53,7 +53,6 @@ class _ShowingAllContainerState extends State<ShowingAllContainer> {
             itemCount: data.data!.length,
             itemBuilder: (context, index) {
               return SingleDataContainer(
-                icon: Icons.error,
                 containerName: data.data![index].n!,
                 avgChange: (data.data![index].apc!).toString(),
                 avgChangePositive: data.data![index].apc! > 0 ? true : false,

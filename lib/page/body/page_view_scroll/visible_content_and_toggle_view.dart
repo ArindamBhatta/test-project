@@ -98,8 +98,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
                                     Text(
                                       name,
                                       softWrap: false,
-                                      overflow:
-                                          TextOverflow.fade, //* apply hear
+                                      overflow: TextOverflow.fade,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 12.0,

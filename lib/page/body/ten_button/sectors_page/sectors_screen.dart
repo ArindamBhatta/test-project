@@ -6,22 +6,27 @@ class SectorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 7, 145, 237),
+      color: Color.fromARGB(255, 3, 91, 158),
       child: Column(
         children: [
           Container(
             width: double.infinity,
-            color: Color.fromARGB(255, 7, 145, 237),
-            padding: const EdgeInsets.only(top: 25.0, bottom: 8.0),
+            margin: EdgeInsets.only(top: 32.0, left: 16.0),
+            height: 70.0,
             child: const Navbar(),
           ),
+          const SizedBox(height: 8.0),
           Expanded(
             child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 8.0,
+              ),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
                 ),
               ),
               child: const ShowingAllContainer(),
