@@ -27,7 +27,12 @@ class Navbar extends StatelessWidget {
         const SizedBox(width: 16.0),
         const Text(
           "Sectors",
-          style: TextStyle(fontSize: 26.0, color: Colors.white),
+          style: TextStyle(
+            fontSize: 26.0,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            decoration: TextDecoration.none,
+          ),
         ),
       ],
     );

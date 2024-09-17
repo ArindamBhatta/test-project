@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_page/page/header_footer/last_navbar.dart';
 import 'page_view_scroll/main_page_view_controller.dart';
-
 import 'ten_button/navigation_icons.dart';
 import 'fear_and_green_indicator/fear_and_greed_controller.dart';
-import 'top_two_data_container/top_two_data_container.dart';
+import 'top_two_data_container/both_card.dart';
 import 'four_card_with_graph/all_four_card.dart';
 
 class BodyContainer extends StatefulWidget {
@@ -28,7 +27,7 @@ class _BodyContainerState extends State<BodyContainer> {
             topRight: Radius.circular(12),
           ),
         ),
-        child: const SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
@@ -41,7 +40,7 @@ class _BodyContainerState extends State<BodyContainer> {
                     SizedBox(height: 12.0),
                     MCapCard(),
                     FearAndGreedIndex(),
-                    TopTwoDataContainer(),
+                    BothCard(),
                     NavigationIcons(),
                   ],
                 ),

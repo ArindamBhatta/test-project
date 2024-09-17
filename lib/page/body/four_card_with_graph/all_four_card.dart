@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'individual_card.dart';
+import 'card_structure.dart';
 import '../../../../model/model_one.dart';
 import '../../../repo/repo.dart';
 
@@ -45,26 +45,22 @@ class _MCapCardState extends State<MCapCard> {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // *1st card
-              IndividualCard(
+              CardStructure(
                 title: 'Total M.cap',
                 value: data.data?.mc?.v.toString() ?? '404',
                 change: data.data?.mc?.c.toString() ?? '404',
               ),
-              // *2nd card
-              IndividualCard(
+              CardStructure(
                 title: '24h Vol',
                 value: data.data?.v?.v.toString() ?? '404',
                 change: data.data?.v?.c.toString() ?? '404',
               ),
-              // *3rd card
-              IndividualCard(
+              CardStructure(
                 title: 'BTC.D',
                 value: data.data?.b?.v?.toString() ?? '404',
                 change: data.data?.b?.c?.toString() ?? '404',
               ),
-              // *4th card
-              IndividualCard(
+              CardStructure(
                 title: 'ETH.D',
                 value: data.data?.e?.v?.toString() ?? '404',
                 change: data.data?.e?.c?.toString() ?? '404',

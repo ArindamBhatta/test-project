@@ -3,19 +3,21 @@ import 'hidden_data_container.dart';
 
 class SingleDataContainer extends StatefulWidget {
   const SingleDataContainer({
+    super.key,
     required this.icon,
     required this.containerName,
     required this.avgChange,
     required this.avgChangePositive,
     required this.marketCap,
     required this.volume,
+    required this.gainers,
     required this.topGainer,
     required this.gainerPercentage,
+    required this.looser,
     required this.loserPercentage,
     required this.dominance,
     required this.isDataVisible,
     required this.onVisibilityChanged,
-    super.key,
   });
 
   final IconData icon;
@@ -24,8 +26,10 @@ class SingleDataContainer extends StatefulWidget {
   final bool avgChangePositive;
   final String marketCap;
   final String volume;
+  final String gainers;
   final String topGainer;
   final String gainerPercentage;
+  final String looser;
   final String loserPercentage;
   final String dominance;
   final bool isDataVisible;
@@ -51,7 +55,7 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
         side: const BorderSide(
-          color: Color.fromARGB(121, 120, 119, 119),
+          color: Color.fromARGB(255, 255, 255, 255),
           width: 1.0,
         ),
       ),
@@ -75,8 +79,8 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
                     Text(
                       widget.containerName,
                       style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -99,7 +103,7 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
                             ),
                             const SizedBox(width: 2.0),
                             Text(
-                              widget.avgChange,
+                              '${widget.avgChange}%',
                               style: TextStyle(
                                 color: widget.avgChangePositive
                                     ? Colors.green
@@ -174,8 +178,10 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
             HiddenDataContainer(
               marketCap: widget.marketCap,
               volume: widget.volume,
+              gainers: widget.gainers,
               topGainer: widget.topGainer,
               gainerPercentage: widget.gainerPercentage,
+              looser: widget.looser,
               loserPercentage: widget.loserPercentage,
               dominance: widget.dominance,
               isDataVisible: widget.isDataVisible,

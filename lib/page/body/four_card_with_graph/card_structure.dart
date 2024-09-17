@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class IndividualCard extends StatelessWidget {
+class CardStructure extends StatelessWidget {
   final String title;
   final String value;
   final String change;
 
-  const IndividualCard({
+  const CardStructure({
     super.key,
     required this.title,
     required this.value,

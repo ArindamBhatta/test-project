@@ -4,8 +4,10 @@ class HiddenDataContainer extends StatelessWidget {
   const HiddenDataContainer({
     required this.marketCap,
     required this.volume,
+    required this.gainers,
     required this.topGainer,
     required this.gainerPercentage,
+    required this.looser,
     required this.loserPercentage,
     required this.dominance,
     required this.isDataVisible,
@@ -15,9 +17,11 @@ class HiddenDataContainer extends StatelessWidget {
 
   final String marketCap;
   final String volume;
+  final String gainers;
   final String topGainer;
   final String gainerPercentage;
   final String loserPercentage;
+  final String looser;
   final String dominance;
   final bool isDataVisible;
   final VoidCallback onVisibilityChanged;
@@ -101,7 +105,7 @@ class HiddenDataContainer extends StatelessWidget {
                         Text('Gainers', style: labelStyle()),
                         Row(
                           children: [
-                            const Text('0'),
+                            Text(gainers),
                             Text(' ▲ $gainerPercentage',
                                 style: const TextStyle(
                                   color: Colors.green,
@@ -164,7 +168,7 @@ class HiddenDataContainer extends StatelessWidget {
                       Text('Loser %', style: labelStyle()),
                       Row(
                         children: [
-                          const Text('0'),
+                          Text(looser),
                           Text('  ▼  $loserPercentage',
                               style: const TextStyle(
                                 color: Color.fromARGB(255, 237, 5, 5),

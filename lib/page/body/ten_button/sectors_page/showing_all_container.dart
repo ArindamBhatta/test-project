@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../../model/model_three.dart';
 import 'single_data_container.dart';
 import '../../../../repo/repo.dart';
 
@@ -13,8 +13,8 @@ class ShowingAllContainer extends StatefulWidget {
 }
 
 class _ShowingAllContainerState extends State<ShowingAllContainer> {
-  int? visibleDataIndex;
-  late Future<Map<String, dynamic>?> _dataFuture;
+  var visibleDataIndex;
+  late Future<ModelThree?> _dataFuture;
 
   void handleVisibilityChanged(int index) {
     setState(() {
@@ -26,12 +26,11 @@ class _ShowingAllContainerState extends State<ShowingAllContainer> {
   void initState() {
     super.initState();
     _dataFuture = Repo.accessSectorsApi();
-    print(_dataFuture);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String, dynamic>?>(
+    return FutureBuilder<ModelThree?>(
       future: _dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,23 +49,22 @@ class _ShowingAllContainerState extends State<ShowingAllContainer> {
           );
         } else if (snapshot.hasData) {
           final data = snapshot.data!;
-          print(data);
           return ListView.builder(
-            // Added return here
-            physics: const BouncingScrollPhysics(),
-            itemCount: 15,
+            itemCount: data.data!.length,
             itemBuilder: (context, index) {
               return SingleDataContainer(
                 icon: Icons.error,
-                containerName: 'Arindam',
-                avgChange: '400',
-                avgChangePositive: false,
-                marketCap: '400',
-                volume: '400',
-                topGainer: '400',
-                gainerPercentage: '400',
-                loserPercentage: '400',
-                dominance: '400',
+                containerName: data.data![index].n!,
+                avgChange: (data.data![index].apc!).toString(),
+                avgChangePositive: data.data![index].apc! > 0 ? true : false,
+                marketCap: data.data![index].mc!.toString(),
+                volume: data.data![index].v!.toString(),
+                gainers: data.data![index].g!.toString(),
+                topGainer: data.data![index].tg!,
+                gainerPercentage: data.data![index].gp!.toString(),
+                looser: data.data![index].l!.toString(),
+                loserPercentage: data.data![index].lp!.toString(),
+                dominance: data.data![index].d!.toString(),
                 isDataVisible: visibleDataIndex == index,
                 onVisibilityChanged: () => handleVisibilityChanged(index),
               );

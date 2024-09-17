@@ -29,12 +29,12 @@ abstract class Repo {
     return null;
   }
 
-  static Future<Map<String, dynamic>?> accessSectorsApi() async {
+  static Future<ModelThree?> accessSectorsApi() async {
     try {
       Map<String, dynamic>? data = await Service.accessSectorsData();
       ModelThree modelThree = ModelThree.fromJson(data!);
       print('print one dart value  ${modelThree.data![0].n}');
-      return data;
+      return modelThree;
     } catch (error) {
       print('Error fetching data: $error');
     }
