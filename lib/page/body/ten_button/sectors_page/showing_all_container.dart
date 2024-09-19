@@ -50,20 +50,24 @@ class _ShowingAllContainerState extends State<ShowingAllContainer> {
         } else if (snapshot.hasData) {
           final data = snapshot.data!;
           return ListView.builder(
+            scrollDirection: Axis.vertical,
+            physics: const AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(4.0),
             itemCount: data.data!.length,
             itemBuilder: (context, index) {
               return SingleDataContainer(
-                containerName: data.data![index].n!,
-                avgChange: (data.data![index].apc!).toString(),
+                containerName: data.data![index].n ?? 'N/A',
+                avgChange: (data.data![index].apc).toString(),
                 avgChangePositive: data.data![index].apc! > 0 ? true : false,
-                marketCap: data.data![index].mc!.toString(),
-                volume: data.data![index].v!.toString(),
-                gainers: data.data![index].g!.toString(),
-                topGainer: data.data![index].tg!,
-                gainerPercentage: data.data![index].gp!.toString(),
-                looser: data.data![index].l!.toString(),
-                loserPercentage: data.data![index].lp!.toString(),
-                dominance: data.data![index].d!.toString(),
+                marketCap: data.data![index].mc.toString(),
+                volume: data.data![index].v.toString(),
+                gainers: data.data![index].g.toString(),
+                topGainer: data.data![index].tg.toString(),
+                gainerPercentage: data.data![index].gp.toString(),
+                looser: data.data![index].l.toString(),
+                loserPercentage: data.data![index].lp.toString(),
+                dominance: data.data![index].d.toString(),
                 isDataVisible: visibleDataIndex == index,
                 onVisibilityChanged: () => handleVisibilityChanged(index),
               );

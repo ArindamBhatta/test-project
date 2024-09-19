@@ -57,13 +57,12 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             //* parent Row Store visible card data
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //* 1st child Store icon and name
                 Expanded(
@@ -144,7 +143,13 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                         ),
-                        onPressed: widget.onVisibilityChanged,
+                        onPressed: () {
+                          Future.delayed(Duration(milliseconds: 300), () {
+                            setState(() {
+                              switchDataVisibility();
+                            });
+                          });
+                        },
                         child: Center(
                           child: widget.isDataVisible
                               ? const Text(
@@ -197,3 +202,14 @@ class _SingleDataContainerState extends State<SingleDataContainer> {
     );
   }
 }
+
+/* 
+onPressed: () {
+                Future.delayed(Duration(milliseconds: 500), () {
+                    setState(() {
+                         Update UI or display new content here
+                    });
+                });
+            },
+            child: Text('Click me'),
+ */

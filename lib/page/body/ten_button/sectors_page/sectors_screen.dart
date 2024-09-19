@@ -15,13 +15,13 @@ class SectorsScreen extends StatelessWidget {
             height: 70.0,
             child: const Navbar(),
           ),
-          const SizedBox(height: 8.0),
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 8.0,
               ),
+              margin: EdgeInsetsDirectional.zero,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.only(
