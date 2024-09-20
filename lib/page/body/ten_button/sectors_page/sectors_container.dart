@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../model/model_three.dart';
-import 'single_data_container.dart';
+import 'components/visible_component.dart';
 import '../../../../repo/repo.dart';
 
 class ShowingAllContainer extends StatefulWidget {

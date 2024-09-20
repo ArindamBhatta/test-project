@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './navbar.dart';
-import './showing_all_container.dart';
+import 'components/navbar.dart';
+import 'sectors_container.dart';
 
 class SectorsScreen extends StatelessWidget {
   @override
