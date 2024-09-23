@@ -1,37 +1,18 @@
 import 'package:flutter/material.dart';
-import '../../../../model/model_three.dart';
-import 'components/visible_component.dart';
-import '../../../../repo/repo.dart';
+import 'package:provider/provider.dart';
+import '../../../../../model/model_three.dart';
+import '../widgets/visible_component.dart';
+import '../provider/provider.dart';
 
-class ShowingAllContainer extends StatefulWidget {
-  const ShowingAllContainer({super.key});
-
-  @override
-  State<ShowingAllContainer> createState() {
-    return _ShowingAllContainerState();
-  }
-}
-
-class _ShowingAllContainerState extends State<ShowingAllContainer> {
-  var visibleDataIndex;
-  late Future<ModelThree?> _dataFuture;
-
-  void handleVisibilityChanged(int index) {
-    setState(() {
-      visibleDataIndex = (visibleDataIndex == index) ? null : index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _dataFuture = Repo.accessSectorsApi();
-  }
+class NavigationScreen extends StatelessWidget {
+  const NavigationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final toggleProvider = Provider.of<ToggleProvider>(context);
+
     return FutureBuilder<ModelThree?>(
-      future: _dataFuture,
+      future: toggleProvider.dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
@@ -56,7 +37,7 @@ class _ShowingAllContainerState extends State<ShowingAllContainer> {
             padding: const EdgeInsets.all(4.0),
             itemCount: data.data!.length,
             itemBuilder: (context, index) {
-              return SingleDataContainer(
+              return VisibleComponent(
                 containerName: data.data![index].n ?? 'N/A',
                 avgChange: (data.data![index].apc).toString(),
                 avgChangePositive: data.data![index].apc! > 0 ? true : false,
@@ -68,8 +49,9 @@ class _ShowingAllContainerState extends State<ShowingAllContainer> {
                 looser: data.data![index].l.toString(),
                 loserPercentage: data.data![index].lp.toString(),
                 dominance: data.data![index].d.toString(),
-                isDataVisible: visibleDataIndex == index,
-                onVisibilityChanged: () => handleVisibilityChanged(index),
+                isDataVisible: toggleProvider.visibleDataIndex == index,
+                onVisibilityChanged: () =>
+                    toggleProvider.handleVisibilityChanged(index),
               );
             },
           );

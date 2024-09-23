@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'hidden_component.dart';
 
-class SingleDataContainer extends StatefulWidget {
-  const SingleDataContainer({
+class VisibleComponent extends StatefulWidget {
+  const VisibleComponent({
     super.key,
     required this.containerName,
     required this.avgChange,
@@ -34,12 +34,12 @@ class SingleDataContainer extends StatefulWidget {
   final VoidCallback onVisibilityChanged;
 
   @override
-  State<SingleDataContainer> createState() {
+  State<VisibleComponent> createState() {
     return _SingleDataContainerState();
   }
 }
 
-class _SingleDataContainerState extends State<SingleDataContainer> {
+class _SingleDataContainerState extends State<VisibleComponent> {
   void switchDataVisibility() {
     widget.onVisibilityChanged();
   }
