@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'hidden_component.dart';
+import 'package:provider/provider.dart';
+import 'sector_card_extended.dart';
+import '../provider/provider.dart';
 
-class VisibleComponent extends StatefulWidget {
-  const VisibleComponent({
-    super.key,
+class SectorCard extends StatelessWidget {
+  const SectorCard({
+    required this.index,
     required this.containerName,
     required this.avgChange,
     required this.avgChangePositive,
@@ -15,10 +17,10 @@ class VisibleComponent extends StatefulWidget {
     required this.looser,
     required this.loserPercentage,
     required this.dominance,
-    required this.isDataVisible,
-    required this.onVisibilityChanged,
+    super.key,
   });
 
+  final int index;
   final String containerName;
   final String avgChange;
   final bool avgChangePositive;
@@ -30,22 +32,10 @@ class VisibleComponent extends StatefulWidget {
   final String looser;
   final String loserPercentage;
   final String dominance;
-  final bool isDataVisible;
-  final VoidCallback onVisibilityChanged;
-
-  @override
-  State<VisibleComponent> createState() {
-    return _SingleDataContainerState();
-  }
-}
-
-class _SingleDataContainerState extends State<VisibleComponent> {
-  void switchDataVisibility() {
-    widget.onVisibilityChanged();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final bool isVisible = context.watch<ToggleProvider>().isVisible(index);
     return Card(
       elevation: 1.5,
       clipBehavior: Clip.antiAlias,
@@ -61,10 +51,8 @@ class _SingleDataContainerState extends State<VisibleComponent> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            //* parent Row Store visible card data
             child: Row(
               children: [
-                //* 1st child Store icon and name
                 Expanded(
                   child: Row(
                     children: [
@@ -75,7 +63,7 @@ class _SingleDataContainerState extends State<VisibleComponent> {
                       const SizedBox(width: 8.0),
                       Expanded(
                         child: Text(
-                          widget.containerName,
+                          containerName,
                           softWrap: false,
                           overflow: TextOverflow.fade,
                           style: const TextStyle(
@@ -88,7 +76,6 @@ class _SingleDataContainerState extends State<VisibleComponent> {
                   ),
                 ),
                 const SizedBox(width: 10.0),
-                //* 2nd child Store % change and toggle button
                 Row(
                   children: [
                     Column(
@@ -97,19 +84,18 @@ class _SingleDataContainerState extends State<VisibleComponent> {
                         Row(
                           children: [
                             Icon(
-                              (widget.avgChangePositive)
+                              avgChangePositive
                                   ? Icons.arrow_upward
                                   : Icons.arrow_downward,
-                              color: widget.avgChangePositive
-                                  ? Colors.green
-                                  : Colors.red,
+                              color:
+                                  avgChangePositive ? Colors.green : Colors.red,
                               size: 16.0,
                             ),
                             const SizedBox(width: 2.0),
                             Text(
-                              '${widget.avgChange}%',
+                              avgChange,
                               style: TextStyle(
-                                color: widget.avgChangePositive
+                                color: avgChangePositive
                                     ? Colors.green
                                     : Colors.red,
                                 fontSize: 16.0,
@@ -130,12 +116,10 @@ class _SingleDataContainerState extends State<VisibleComponent> {
                       height: 25,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: widget.isDataVisible
-                            ? Colors.blue[800]
-                            : Colors.white,
+                        color: isVisible ? Colors.blue[800] : Colors.white,
                         border: Border.all(
                           color: Colors.black,
-                          width: widget.isDataVisible ? 1.0 : 0.5,
+                          width: isVisible ? 1.0 : 0.5,
                         ),
                       ),
                       child: TextButton(
@@ -144,14 +128,12 @@ class _SingleDataContainerState extends State<VisibleComponent> {
                           minimumSize: Size.zero,
                         ),
                         onPressed: () {
-                          Future.delayed(Duration(milliseconds: 300), () {
-                            setState(() {
-                              switchDataVisibility();
-                            });
-                          });
+                          context
+                              .read<ToggleProvider>()
+                              .toggleVisibility(index);
                         },
                         child: Center(
-                          child: widget.isDataVisible
+                          child: isVisible
                               ? const Text(
                                   '-',
                                   style: TextStyle(
@@ -169,33 +151,34 @@ class _SingleDataContainerState extends State<VisibleComponent> {
                                 ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],
             ),
           ),
           const SizedBox(height: 4.0),
-          if (widget.isDataVisible)
-            const SizedBox(
-              width: double.infinity,
-              child: Divider(
-                color: Color.fromARGB(150, 158, 158, 158),
-                thickness: 2.0,
-              ),
-            ),
-          if (widget.isDataVisible)
-            HiddenDataContainer(
-              marketCap: widget.marketCap,
-              volume: widget.volume,
-              gainers: widget.gainers,
-              topGainer: widget.topGainer,
-              gainerPercentage: widget.gainerPercentage,
-              looser: widget.looser,
-              loserPercentage: widget.loserPercentage,
-              dominance: widget.dominance,
-              isDataVisible: widget.isDataVisible,
-              onVisibilityChanged: widget.onVisibilityChanged,
+          if (isVisible)
+            Column(
+              children: [
+                const SizedBox(
+                  width: double.infinity,
+                  child: Divider(
+                    color: Color.fromARGB(150, 158, 158, 158),
+                    thickness: 2.0,
+                  ),
+                ),
+                SectorCardExtended(
+                  marketCap: marketCap,
+                  volume: volume,
+                  gainers: gainers,
+                  topGainer: topGainer,
+                  gainerPercentage: gainerPercentage,
+                  looser: looser,
+                  loserPercentage: loserPercentage,
+                  dominance: dominance,
+                ),
+              ],
             ),
         ],
       ),

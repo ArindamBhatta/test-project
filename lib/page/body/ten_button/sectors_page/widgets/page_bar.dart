@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Navbar extends StatelessWidget {
-  const Navbar({super.key});
+class PageBar extends StatelessWidget {
+  const PageBar({super.key});
 
   Widget sectorsLogoWidget() {
     return ClipOval(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'sectors_page/screen/sectors.dart';
+import 'sectors_page/widgets/sectors_page.dart';
 import 'button_icons.dart';
 
 class NavigationIcons extends StatefulWidget {
@@ -15,7 +15,7 @@ class _NavigationButtonState extends State<NavigationIcons> {
     if (activeScreen == 'Sectors') {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SectorsScreen()),
+        MaterialPageRoute(builder: (context) => SectorsPage()),
       );
     }
   }

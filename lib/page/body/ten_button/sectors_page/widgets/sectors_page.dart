@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/provider.dart';
-import '../widgets/navbar.dart';
-import 'navigation.dart';
+import 'page_bar.dart';
+import 'sectors_list.dart';
 
-class SectorsScreen extends StatelessWidget {
+class SectorsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -21,7 +21,7 @@ class SectorsScreen extends StatelessWidget {
               width: double.infinity,
               margin: EdgeInsets.only(top: 32.0, left: 16.0),
               height: 70.0,
-              child: const Navbar(),
+              child: const PageBar(),
             ),
             Expanded(
               child: Container(
@@ -37,7 +37,7 @@ class SectorsScreen extends StatelessWidget {
                     topRight: Radius.circular(40),
                   ),
                 ),
-                child: const NavigationScreen(),
+                child: const SectorsList(),
               ),
             ),
           ],

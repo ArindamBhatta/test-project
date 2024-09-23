@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import '../../../../../model/model_three.dart';
-import '../../../../../repo/repo.dart';
 
 class ToggleProvider extends ChangeNotifier {
-  int? visibleDataIndex;
-  Future<ModelThree?>? _dataFuture;
+  int? unfoldedCardIndex; // Tracks which card is expanded.
 
-  Future<ModelThree?>? get dataFuture => _dataFuture;
-
-  ToggleProvider() {
-    fetchData();
+  bool isVisible(int index) {
+    if (unfoldedCardIndex == index) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  void handleVisibilityChanged(int index) {
-    visibleDataIndex = (visibleDataIndex == index) ? null : index;
-    notifyListeners();
-  }
-
-  // Function to fetch data from API
-  Future<void> fetchData() async {
-    _dataFuture = Repo.accessSectorsApi();
+  void toggleVisibility(int index) {
+    if (unfoldedCardIndex == index) {
+      unfoldedCardIndex = null; // Collapse if same card clicked.
+    } else {
+      unfoldedCardIndex = index; // Expand if a different card clicked.
+    }
     notifyListeners();
   }
 }

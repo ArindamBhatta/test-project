@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class HiddenDataContainer extends StatelessWidget {
-  const HiddenDataContainer({
+class SectorCardExtended extends StatelessWidget {
+  const SectorCardExtended({
+    super.key,
     required this.marketCap,
     required this.volume,
     required this.gainers,
@@ -10,9 +11,6 @@ class HiddenDataContainer extends StatelessWidget {
     required this.looser,
     required this.loserPercentage,
     required this.dominance,
-    required this.isDataVisible,
-    required this.onVisibilityChanged,
-    super.key,
   });
 
   final String marketCap;
@@ -23,8 +21,6 @@ class HiddenDataContainer extends StatelessWidget {
   final String loserPercentage;
   final String looser;
   final String dominance;
-  final bool isDataVisible;
-  final VoidCallback onVisibilityChanged;
 
   TextStyle labelStyle() {
     return const TextStyle(

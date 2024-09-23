@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../../model/model_three.dart';
-import '../widgets/visible_component.dart';
-import '../provider/provider.dart';
+import '../../../../../repo/repo.dart';
+import 'sector_card.dart';
 
-class NavigationScreen extends StatelessWidget {
-  const NavigationScreen({super.key});
+class SectorsList extends StatefulWidget {
+  const SectorsList({super.key});
+
+  @override
+  State<SectorsList> createState() {
+    return _SectorsListState();
+  }
+}
+
+class _SectorsListState extends State<SectorsList> {
+  Future<ModelThree?>? _dataFuture;
+  Future<ModelThree?>? get dataFuture {
+    return _dataFuture;
+  }
+
+  @override
+  void initState() {
+    _dataFuture = Repo.accessSectorsApi();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final toggleProvider = Provider.of<ToggleProvider>(context);
-
     return FutureBuilder<ModelThree?>(
-      future: toggleProvider.dataFuture,
+      future: dataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
@@ -36,8 +51,12 @@ class NavigationScreen extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.all(4.0),
             itemCount: data.data!.length,
-            itemBuilder: (context, index) {
-              return VisibleComponent(
+            itemBuilder: (
+              context,
+              index,
+            ) {
+              return SectorCard(
+                index: index,
                 containerName: data.data![index].n ?? 'N/A',
                 avgChange: (data.data![index].apc).toString(),
                 avgChangePositive: data.data![index].apc! > 0 ? true : false,
@@ -49,9 +68,6 @@ class NavigationScreen extends StatelessWidget {
                 looser: data.data![index].l.toString(),
                 loserPercentage: data.data![index].lp.toString(),
                 dominance: data.data![index].d.toString(),
-                isDataVisible: toggleProvider.visibleDataIndex == index,
-                onVisibilityChanged: () =>
-                    toggleProvider.handleVisibilityChanged(index),
               );
             },
           );
