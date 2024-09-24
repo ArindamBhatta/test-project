@@ -26,6 +26,7 @@ class _SectorsListState extends State<SectorsList> {
 
   @override
   Widget build(BuildContext context) {
+    print("is list view rerendered?");
     return FutureBuilder<ModelThree?>(
       future: dataFuture,
       builder: (context, snapshot) {

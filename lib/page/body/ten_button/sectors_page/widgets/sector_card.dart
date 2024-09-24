@@ -36,6 +36,8 @@ class SectorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isVisible = context.watch<ToggleProvider>().isVisible(index);
+    print(isVisible);
+
     return Card(
       elevation: 1.5,
       clipBehavior: Clip.antiAlias,
@@ -56,7 +58,7 @@ class SectorCard extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.sports_soccer_rounded,
                         size: 34.0,
                       ),
@@ -133,22 +135,16 @@ class SectorCard extends StatelessWidget {
                               .toggleVisibility(index);
                         },
                         child: Center(
-                          child: isVisible
-                              ? const Text(
-                                  '-',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : const Text(
-                                  '+',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                          child: Text(
+                            isVisible ? '-' : '+',
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: isVisible ? Colors.white : Colors.black,
+                              fontWeight: isVisible
+                                  ? FontWeight.normal
+                                  : FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),

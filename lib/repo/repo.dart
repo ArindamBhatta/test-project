@@ -34,7 +34,6 @@ abstract class Repo {
       Map<String, dynamic>? data =
           await Service.accessSectorsData() as Map<String, dynamic>;
       ModelThree modelThree = ModelThree.fromJson(data);
-      print('print one dart value  ${modelThree.data![0].n}');
       return modelThree;
     } catch (error) {
       print('Error fetching data: $error');
