@@ -21,7 +21,9 @@ class PageBar extends StatelessWidget {
         IconButton(
           color: Colors.white,
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         sectorsLogoWidget(),
         const SizedBox(width: 16.0),

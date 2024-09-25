@@ -4,7 +4,7 @@ import 'sector_card_extended.dart';
 import '../provider/provider.dart';
 
 class SectorCard extends StatelessWidget {
-  const SectorCard({
+  SectorCard({
     required this.index,
     required this.containerName,
     required this.avgChange,
@@ -18,7 +18,9 @@ class SectorCard extends StatelessWidget {
     required this.loserPercentage,
     required this.dominance,
     super.key,
-  });
+  }) {
+    print("SectorCard constructor called $index");
+  }
 
   final int index;
   final String containerName;
@@ -35,8 +37,11 @@ class SectorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isVisible = context.watch<ToggleProvider>().isVisible(index);
-    print(isVisible);
+    print("called before watch $index");
+    final int? unfoldedCardIndex =
+        context.watch<ToggleProvider>().unfoldedCardIndex;
+    bool unfold = index == unfoldedCardIndex;
+    print("print bool value $unfoldedCardIndex $index ${unfold.toString()}");
 
     return Card(
       elevation: 1.5,
@@ -118,10 +123,10 @@ class SectorCard extends StatelessWidget {
                       height: 25,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: isVisible ? Colors.blue[800] : Colors.white,
+                        color: unfold ? Colors.blue[800] : Colors.white,
                         border: Border.all(
                           color: Colors.black,
-                          width: isVisible ? 1.0 : 0.5,
+                          width: unfold ? 1.0 : 0.5,
                         ),
                       ),
                       child: TextButton(
@@ -136,13 +141,12 @@ class SectorCard extends StatelessWidget {
                         },
                         child: Center(
                           child: Text(
-                            isVisible ? '-' : '+',
+                            unfold ? '-' : '+',
                             style: TextStyle(
                               fontSize: 12.0,
-                              color: isVisible ? Colors.white : Colors.black,
-                              fontWeight: isVisible
-                                  ? FontWeight.normal
-                                  : FontWeight.bold,
+                              color: unfold ? Colors.white : Colors.black,
+                              fontWeight:
+                                  unfold ? FontWeight.normal : FontWeight.bold,
                             ),
                           ),
                         ),
@@ -154,7 +158,7 @@ class SectorCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4.0),
-          if (isVisible)
+          if (unfold)
             Column(
               children: [
                 const SizedBox(

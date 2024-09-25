@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../provider/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../model/model_three.dart';
 import '../../../../../repo/repo.dart';
 import 'sector_card.dart';
@@ -26,7 +28,8 @@ class _SectorsListState extends State<SectorsList> {
 
   @override
   Widget build(BuildContext context) {
-    print("is list view rerendered?");
+    print("How many time list is render?");
+
     return FutureBuilder<ModelThree?>(
       future: dataFuture,
       builder: (context, snapshot) {
