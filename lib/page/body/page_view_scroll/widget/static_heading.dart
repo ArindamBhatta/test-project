@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SecondHeading extends StatelessWidget {
-  const SecondHeading({super.key});
+class StaticHeading extends StatelessWidget {
+  const StaticHeading({super.key});
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

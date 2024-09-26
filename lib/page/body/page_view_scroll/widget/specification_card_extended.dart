@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HiddenContent extends StatelessWidget {
-  const HiddenContent({
+class SpecificationCardExtended extends StatelessWidget {
+  const SpecificationCardExtended({
     super.key,
   });
 
@@ -103,8 +103,9 @@ class HiddenContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16.0),
                 Image(
-                    image: const AssetImage(
-                        'assets/images/toggle_view_graph.png')),
+                  image:
+                      const AssetImage('assets/images/toggle_view_graph.png'),
+                ),
               ],
             ),
           ),

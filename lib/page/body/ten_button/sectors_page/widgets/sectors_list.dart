@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../provider/provider.dart';
-import 'package:provider/provider.dart';
 import '../../../../../model/model_three.dart';
 import '../../../../../repo/repo.dart';
 import 'sector_card.dart';

@@ -21,7 +21,6 @@ abstract class Repo {
     try {
       Map<String, dynamic>? data = await Service.accessSecondData();
       ModelTwo modelTwo = ModelTwo.fromJson(data!);
-
       return modelTwo;
     } catch (error) {
       print('Error fetching data: $error');

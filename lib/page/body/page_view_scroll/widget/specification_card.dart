@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-import 'hidden_content.dart';
+import 'package:provider/provider.dart';
+import 'specification_card_extended.dart';
+import '../Provider/specification_provider.dart';
 
-class VisibleContentAndToggleView extends StatelessWidget {
-  const VisibleContentAndToggleView({
+class SpecificationCard extends StatelessWidget {
+  SpecificationCard({
     super.key,
+    required this.index,
     required this.cardNumber,
     required this.name,
     required this.shortName,
     required this.conditionalValue,
     required this.totalValue,
     required this.currencyShort,
-    required this.isHiddenDataVisible,
-    required this.onVisibilityChanged,
   });
+
+  final index;
   final String cardNumber;
   final String name;
   final String shortName;
   final conditionalValue;
   final String totalValue;
   final currencyShort;
-  final bool isHiddenDataVisible;
-  final VoidCallback onVisibilityChanged;
 
   @override
   Widget build(BuildContext context) {
+    final int? unfoldedCardIndex = context.select(
+      (SpecificationProvider provider) => provider.unfoldedCardIndex,
+    );
+    bool unfold = index == unfoldedCardIndex;
+
     String currencyChange() {
       if (currencyShort > 1000000000) {
         return '${(currencyShort / 1000000000).toStringAsFixed(2)}T';
@@ -160,12 +166,10 @@ class VisibleContentAndToggleView extends StatelessWidget {
                               height: 25,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: isHiddenDataVisible
-                                    ? Colors.blue[800]
-                                    : Colors.white,
+                                color: unfold ? Colors.blue[800] : Colors.white,
                                 border: Border.all(
                                   color: Colors.black,
-                                  width: isHiddenDataVisible ? 1.0 : 0.5,
+                                  width: unfold ? 1.0 : 0.5,
                                 ),
                               ),
                               child: TextButton(
@@ -173,9 +177,14 @@ class VisibleContentAndToggleView extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   minimumSize: Size.zero,
                                 ),
-                                onPressed: onVisibilityChanged,
+                                onPressed: () {
+                                  context
+                                      .read<
+                                          SpecificationProvider>() //* use provider
+                                      .toggleVisibility(index);
+                                },
                                 child: Center(
-                                  child: isHiddenDataVisible
+                                  child: unfold
                                       ? const Text(
                                           '-',
                                           style: TextStyle(
@@ -203,7 +212,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
               ],
             ),
           ),
-          if (isHiddenDataVisible)
+          if (unfold)
             const SizedBox(
               width: double.infinity,
               child: Divider(
@@ -211,7 +220,7 @@ class VisibleContentAndToggleView extends StatelessWidget {
                 thickness: 1.0,
               ),
             ),
-          if (isHiddenDataVisible) const HiddenContent(),
+          if (unfold) const SpecificationCardExtended(),
         ],
       ),
     );

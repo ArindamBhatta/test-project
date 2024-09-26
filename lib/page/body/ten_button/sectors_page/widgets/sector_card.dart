@@ -39,7 +39,7 @@ class SectorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     print("called before watch $index");
     final int? unfoldedCardIndex =
-        context.watch<ToggleProvider>().unfoldedCardIndex;
+        context.select((ToggleProvider provider) => provider.unfoldedCardIndex);
     bool unfold = index == unfoldedCardIndex;
     print("print bool value $unfoldedCardIndex $index ${unfold.toString()}");
 
