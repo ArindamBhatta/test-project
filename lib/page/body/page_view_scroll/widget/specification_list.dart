@@ -20,7 +20,8 @@ class SpecificationList extends StatelessWidget {
       child: Column(
         children: [
           for (int index = 0; index < items.length; index++)
-            if (details[items[index].toString()]?.id)
+            if (details[items[index].toString()]?.id != null &&
+                details[items[index].toString()]?.id != 0)
               SpecificationCard(
                 index: index,
                 cardNumber: items[index].toString(),

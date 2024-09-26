@@ -22,7 +22,8 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
   int? visibleBackground = 0;
   late Future<ModelTwo?> _dataFuture;
 
-  PageController ctrl = PageController();
+  PageController ctrl =
+      PageController(); //* manage the navigation and state of a PageView widget
 
   Future<ModelTwo?> accessSecondApi() async {
     try {
@@ -107,7 +108,9 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
                               onButtonPressed: () {
                                 ctrl.animateToPage(
                                   index,
-                                  duration: const Duration(milliseconds: 100),
+                                  duration: const Duration(
+                                    milliseconds: 100,
+                                  ),
                                   curve: Curves.ease,
                                 );
                               },
@@ -115,7 +118,9 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
                         ],
                       ),
                     ),
+                    //* Static Heading
                     const StaticHeading(),
+                    //* PageView
                     ExpandablePageView(
                       onPageChanged: (scrollIndex) {
                         changeTapOrSwipe(scrollIndex);
@@ -154,3 +159,10 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
         ));
   }
 }
+
+
+/* 
+context.read<ProviderClass>().method(argument);
+context.watch<ProviderClass>().method(argument);
+assign = context.select((Class   instance) => instance.property);
+*/

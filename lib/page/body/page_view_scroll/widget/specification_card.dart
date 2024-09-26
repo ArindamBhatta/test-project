@@ -181,7 +181,7 @@ class SpecificationCard extends StatelessWidget {
                                   context
                                       .read<
                                           SpecificationProvider>() //* use provider
-                                      .toggleVisibility(index);
+                                      .cardState(index);
                                 },
                                 child: Center(
                                   child: unfold
